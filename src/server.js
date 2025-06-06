@@ -30,9 +30,9 @@ export const setupServer = () => {
     const contacts = await getAllContacts();
 
     res.status(200).json({
-      status: '200',
-       message: 'Successfully found contacts!',
-      data: contacts,
+      "status": 200,
+       "message": 'Successfully found contacts!',
+      "data": { contacts, }
     });
   });
 
@@ -50,9 +50,9 @@ export const setupServer = () => {
 
 	// Відповідь, якщо контакт знайдено
     res.status(200).json({
-      status: '200',
+      status: 200,
 	message: `Successfully found contact with id ${contactId}!`,
-      data: contact,
+      data: { contact },
     });
   });
 
