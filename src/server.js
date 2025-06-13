@@ -2,7 +2,9 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
-import { getAllContacts, getContactById } from './services/contacts.js';
+import contactsRouter from './routers/contacts.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 
 
@@ -12,6 +14,12 @@ export const setupServer = () => {
   const app = express();
 
   app.use(cors());
+  app.use(
+    express.json({
+    type: ['application/json', 'application/vnd.api+json'],
+    limit: '100kb',
+    }),
+  );
 
 // Додаємо форматування JSON-виводу з відступами
 app.set('json spaces', 2);
@@ -23,52 +31,20 @@ app.set('json spaces', 2);
       },
     }),
   );
-  
+
   // Головний маршрут
   app.get('/', (req, res) => {
-    res.json({ message: 'Hello world!' });
-  });
-
-  app.get('/contacts', async (req, res) => {
-    const contacts = await getAllContacts();
-
-    res.status(200).json({
-      status: 200,
-      message: 'Successfully found contacts!',
-      data: contacts
+      res.json({ message: 'Hello world!' });
     });
-  });
-
-  app.get('/contacts/:contactId', async (req, res, next) => {
-   
-    try {
-      const { contactId } = req.params;
-      const contact = await getContactById(contactId);
-      if (!contact) {
-        return res.status(404).json({ message: 'Contact not found' });
-      }
-      res.status(200).json({ status: 200, message: `Successfully found contact with id ${contactId}!`, data: contact });
-    } catch (error) {
-      next(error); // передаємо помилку глобальному обробнику
-    }
-  });
+  
+  app.use(contactsRouter);
+  
  
   
-  // Middleware для обробки помилок 
-  app.use((err, req, res, next) => {
-    console.error('Error:', err.message);
-    res.status(500).json({
-    message: 'Something went wrong',
-    error: err.message,
-    });
-  });
+  // Обробник 404 
+  app.use(notFoundHandler);
+  app.use(errorHandler);
   
-    // Обробник 404 
-    app.use((req, res) => {
-      res.status(404).json({
-      message: 'Route not found',
-      });
-    });
   
   // Запуск сервера
   app.listen(PORT, () => {
