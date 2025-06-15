@@ -37,7 +37,7 @@ app.set('json spaces', 2);
       res.json({ message: 'Hello world!' });
     });
   
-  app.use(contactsRouter);
+  app.use('/contacts', contactsRouter);
   
  
   
