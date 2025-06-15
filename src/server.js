@@ -37,11 +37,11 @@ app.set('json spaces', 2);
       res.json({ message: 'Hello world!' });
     });
   
-  app.use('/contacts', contactsRouter);
+  app.use(contactsRouter);
   
  
   
-  // Обробник 404 
+  // Обробник помилок
   app.use(notFoundHandler);
   app.use(errorHandler);
   
