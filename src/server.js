@@ -41,7 +41,7 @@ app.set('json spaces', 2);
   
  
   
-  // Обробник 404 
+  // Обробник помилок
   app.use(notFoundHandler);
   app.use(errorHandler);
   

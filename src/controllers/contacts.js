@@ -1,11 +1,23 @@
 import createHttpError from 'http-errors';
 import { getAllContacts, getContactById, deleteContactById, createContact, updateContact } from '../services/contacts.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 
 export const getAllContactsController = async (req, res, next) => {
 
-    try {
-        const contacts = await getAllContacts();
+  try {
+    const { page, perPage } = parsePaginationParams(req.query);
+    const { sortBy, sortOrder } = parseSortParams(req.query);
+    const filter = parseFilterParams(req.query);
+        const contacts = await getAllContacts({
+          page,
+          perPage,
+          sortBy,
+          sortOrder,
+          filter,
+        });
     
         res.status(200).json({
           status: 200,
@@ -42,16 +54,22 @@ export const getContactByIdController = async (req, res, next) => {
 
 export const deleteContactController = async (req, res, next) => {
     
-    try {
-        const { contactId } = req.params;
     
-        await deleteContactById(contactId);
-    
-       
-        res.status(204).send();
-    } catch (err) {
-        next(err);
+  try {
+    const { contactId } = req.params;
+
+    const contact = await deleteContactById(contactId);
+
+    if (!contact) {
+      return next(createHttpError(404, 'Contact not found'));
     }
+
+    res.status(204).send();
+    console.log(`Deleted contact with ID ${contactId}`);
+  } catch (err) {
+    next(err);
+  }
+   
     
 };
 
