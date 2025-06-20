@@ -16,6 +16,18 @@ const parseContactType = (contactType) => {
     if (typeof value === 'boolean') return value;
   
     return null;
+};
+  
+const parseNumber = (number) => {
+    const isString = typeof number === 'string';
+    if (!isString) return;
+  
+    const parsedNumber = parseInt(number);
+    if (Number.isNaN(parsedNumber)) {
+      return;
+    }
+  
+    return parsedNumber;
   };
   
   
