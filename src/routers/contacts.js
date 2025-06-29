@@ -5,16 +5,21 @@ import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { createContactSchema } from '../validation/contacts.js';
 import { updateContactSchema } from '../validation/contacts.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
 
-router.use('/contacts/:contactId', isValidId('contactId')); // більшь гнучка, можеме змнінювати змінну contactId
+router.use(authenticate);
 
-router.get('/contacts', ctrlWrapper(getAllContactsController));  
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController)); 
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController)); 
-router.post('/contacts',validateBody(createContactSchema), ctrlWrapper(createContactController));  
-router.patch('/contacts/:contactId', validateBody(updateContactSchema), ctrlWrapper(patchContactController));
+router.get('/', ctrlWrapper(getAllContactsController));
+
+router.use('/:contactId', isValidId('contactId')); // більшь гнучка, можеме змнінювати змінну contactId
+
+
+router.get('/:contactId', ctrlWrapper(getContactByIdController)); 
+router.delete('/:contactId', ctrlWrapper(deleteContactController)); 
+router.post('/',validateBody(createContactSchema), ctrlWrapper(createContactController));  
+router.patch('/:contactId', validateBody(updateContactSchema), ctrlWrapper(patchContactController));
 
 
 
