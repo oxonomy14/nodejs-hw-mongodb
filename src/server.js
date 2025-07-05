@@ -7,6 +7,7 @@ import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 
 
 
@@ -23,6 +24,8 @@ export const setupServer = () => {
     limit: '100kb',
     }),
   );
+
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
 // Додаємо форматування JSON-виводу з відступами
 app.set('json spaces', 2);

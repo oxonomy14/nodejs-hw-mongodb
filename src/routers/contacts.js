@@ -6,6 +6,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { createContactSchema } from '../validation/contacts.js';
 import { updateContactSchema } from '../validation/contacts.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { upload } from '../middlewares/multer.js';
 
 const router = Router();
 
@@ -18,8 +19,8 @@ router.use('/:contactId', isValidId('contactId')); // більшь гнучка,
 
 router.get('/:contactId', ctrlWrapper(getContactByIdController)); 
 router.delete('/:contactId', ctrlWrapper(deleteContactController)); 
-router.post('/',validateBody(createContactSchema), ctrlWrapper(createContactController));  
-router.patch('/:contactId', validateBody(updateContactSchema), ctrlWrapper(patchContactController));
+router.post('/', upload.single('photo'), validateBody(createContactSchema), ctrlWrapper(createContactController));  
+router.patch('/:contactId',  upload.single('photo'), validateBody(updateContactSchema), ctrlWrapper(patchContactController));
 
 
 
