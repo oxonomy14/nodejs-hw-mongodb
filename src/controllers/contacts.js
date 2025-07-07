@@ -83,7 +83,18 @@ export const deleteContactController = async (req, res, next) => {
 
 export const createContactController = async (req, res) => {
   const userId = req.user._id;
-  const contact = await createContact({ ...req.body, userId });
+  const photo = req.file;
+
+  let photoUrl;
+  if (photo) {
+    if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
+  }
+
+  const contact = await createContact({ ...req.body, userId,  photo: photoUrl, });
     res.status(201).json({
         message: 'Successfully created a contact',
         status: 201,
