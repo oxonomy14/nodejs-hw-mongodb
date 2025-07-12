@@ -18,17 +18,17 @@ const parseContactType = (contactType) => {
     return null;
 };
   
-const parseNumber = (number) => {
-    const isString = typeof number === 'string';
-    if (!isString) return;
+// const parseNumber = (number) => {
+//     const isString = typeof number === 'string';
+//     if (!isString) return;
   
-    const parsedNumber = parseInt(number);
-    if (Number.isNaN(parsedNumber)) {
-      return;
-    }
+//     const parsedNumber = parseInt(number);
+//     if (Number.isNaN(parsedNumber)) {
+//       return;
+//     }
   
-    return parsedNumber;
-  };
+//     return parsedNumber;
+//   };
   
   
   export const parseFilterParams = (query) => {

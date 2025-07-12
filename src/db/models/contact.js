@@ -23,11 +23,20 @@ const contactsSchema = new Schema(
       enum: ['work', 'home', 'personal'],
       default: 'personal'
     },
+    userId: { // нова властивість 
+      type: Schema.Types.ObjectId, 
+      ref: 'users',
+      required: true
+    },  
+    photo: { type: String },
   },
   {
     timestamps: true,
     versionKey: false,
   },
 );
+
+
+
 
 export const ContactsCollection = model('contacts', contactsSchema);
