@@ -182,7 +182,7 @@
         "tags": [
           "Contact"
         ],
-        "summary": "Get list of contacts",
+        "summary": "Create a contact",
         "operationId": "createContact",
         "description": "Create a contact with payload",
         "security": [
