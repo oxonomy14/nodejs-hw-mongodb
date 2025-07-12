@@ -19,7 +19,7 @@
   ],
   "tags": [
     {
-      "name": "Students",
+      "name": "Contacts",
       "description": "Operations about users."
     },
     {
@@ -180,7 +180,7 @@
       },
       "post": {
         "tags": [
-          "Contacts"
+          "Contact"
         ],
         "summary": "Get list of contacts",
         "operationId": "createContact",
@@ -285,7 +285,7 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/contacts/{contactId}": {
       "get": {
         "tags": [
           "Contact"
@@ -370,7 +370,7 @@
       },
       "delete": {
         "tags": [
-          "Contacts"
+          "Contact"
         ],
         "summary": "Delete contact by ID",
         "operationId": "deleteContactById",
@@ -448,7 +448,7 @@
       },
       "patch": {
         "tags": [
-          "Contacts"
+          "Contact"
         ],
         "summary": "Update contact by ID",
         "operationId": "updateContactById",
@@ -460,8 +460,8 @@
         ],
         "parameters": [
           {
-            "name": "contactId",
             "in": "path",
+            "name": "contactId",
             "required": true,
             "description": "ID of the contact to update",
             "schema": {

@@ -1,7 +1,7 @@
 #/swagger/paths/contacts/post.yaml
 
 tags:
-  - Contacts
+  - Contact
 summary: Get list of contacts
 operationId: createContact
 description: 'Create a contact with payload'

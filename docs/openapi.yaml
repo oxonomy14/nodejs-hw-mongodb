@@ -8,7 +8,7 @@ info:
   description: 
     This is a documentation of contacts app
 tags:
-  - name: Students
+  - name: Contacts
     description: Operations about users.
   - name: Auth
     description: Auth operations.
@@ -21,7 +21,7 @@ paths:
       $ref: ../swagger/paths/contacts/get.yaml
     post:
       $ref: ../swagger/paths/contacts/post.yaml
-  /contacts/{id}:
+  /contacts/{contactId}:
     get:
       $ref: ../swagger/paths/contacts/{contactId}/get.yaml
     delete:

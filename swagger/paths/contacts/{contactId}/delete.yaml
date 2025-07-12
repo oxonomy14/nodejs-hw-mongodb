@@ -1,5 +1,5 @@
 tags:
-  - Contacts
+  - Contact
 summary: Delete contact by ID
 operationId: deleteContactById
 description: Delete a specific contact by their ID
