@@ -2,7 +2,7 @@
 
 tags:
   - Contacts
-summary: Get list of contacts
+summary: Create a contact
 operationId: createContact
 description: 'Create a contact with payload'
 security:
@@ -14,12 +14,8 @@ requestBody:
         type: object
         required:
           - name
-          - email
           - phoneNumber
-          - contactType
-          - isFavourite
-          - photo
-          - userId
+          - contactType      
         properties:
           name:
            description: "Contact's name"
@@ -41,15 +37,10 @@ requestBody:
            description: "Contact's type"
            type: string
            enum: ['work', 'home', 'personal']
-          userId:
-           description: "Contact's user id"
-           type: string
-           example: 686664962b98730e389415a5
           photo:
            description: "Link to contact's photo"
            type: string
            format: binary
-     
 responses:
   '201':
     description: Creates a contact
