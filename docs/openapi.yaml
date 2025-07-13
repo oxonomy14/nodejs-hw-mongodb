@@ -9,9 +9,9 @@ info:
     This is a documentation of contacts app
 tags:
   - name: Contacts
-    description: Operations about users.
+    description: Operations about contacts
   - name: Auth
-    description: Auth operations.
+    description: Auth operations
 servers:
   - url: http://localhost:3000
   - url: https://nodejs-hw-mongodb-4m6u.onrender.com

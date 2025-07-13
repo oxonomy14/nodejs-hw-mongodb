@@ -1,5 +1,5 @@
 tags:
-  - Contact
+  - Contacts
 summary: Delete contact by ID
 operationId: deleteContactById
 description: Delete a specific contact by their ID
@@ -14,22 +14,8 @@ parameters:
       type: string
       example: 6868df2be3a8fce7de0049a1
 responses:
-  '200':
-    description: Contact deleted successfully
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-            - message
-          properties:
-            status:
-              type: integer
-              example: 200
-            message:
-              type: string
-              example: Contact deleted successfully!
+  '204':
+    description: Contact deleted successfully — No content
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':

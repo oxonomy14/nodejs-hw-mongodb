@@ -1,6 +1,6 @@
 # swagger/paths/contacts/{id}/get.yaml
 tags:
-  - Contact
+  - Contacts
 summary: Get contact by id
 operationId: getContact
 description: 'Get contact by id'

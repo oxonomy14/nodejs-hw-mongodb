@@ -1,7 +1,7 @@
 #/swagger/paths/contacts/post.yaml
 
 tags:
-  - Contact
+  - Contacts
 summary: Create a contact
 operationId: createContact
 description: 'Create a contact with payload'
@@ -14,12 +14,8 @@ requestBody:
         type: object
         required:
           - name
-          - email
           - phoneNumber
-          - contactType
-          - isFavourite
-          - photo
-          - userId
+          - contactType      
         properties:
           name:
            description: "Contact's name"
@@ -49,7 +45,6 @@ requestBody:
            description: "Link to contact's photo"
            type: string
            format: binary
-     
 responses:
   '201':
     description: Creates a contact
